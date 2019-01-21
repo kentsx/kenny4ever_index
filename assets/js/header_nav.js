@@ -1,0 +1,17 @@
+document.writeln("<!-- Header -->");
+document.writeln("			<header id=\'header\'>");
+document.writeln("				<div class=\'logo\'><a href=\'index.html\'>KENT4EVER<span> by KENNY</span></a></div>");
+document.writeln("				<a href=\'#menu\'>Menu</a>");
+document.writeln("			</header>");
+document.writeln("");
+document.writeln("		<!-- Nav -->");
+document.writeln("			<nav id=\'menu\'>");
+document.writeln("				<ul class=\'links\'>");
+document.writeln("					<li><a href=\'..\/index.html\'>Home</a></li>");
+//document.writeln("					<li><a href=\'..\/study.html\'>Study</a></li>");
+document.writeln("					<li><a href=\'..\/lovestory.html\'>Love Story</a></li>");
+document.writeln("					<li><a href=\"http://blog.kentspace.xyz\">Blog</a></li>");
+//document.writeln("					<li><a href=\"http://blog.kentspace.xyz\/admin\">Login</a></li>");
+document.writeln("					<li><a href=\'..\/about.html\'>About</a></li>");
+document.writeln("				</ul>");
+document.writeln("			</nav>");

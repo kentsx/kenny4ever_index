@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#d1>img {
+			position: absolute;
+			opacity: 0;
+			transition: all 2s linear;
+		}
+		#d1>img.show { /* 这里必须用#d1>img，不然优先级不够 */
+			z-index: 10; /* 必须用z-index:10;不然后面的图片覆盖前面的 */
+			opacity: 1;
+		}
+	</style>
+</head>
+<body>
+	<div id="d1">
+		<img src="images/banner.jpg" alt="" class="show">
+		<img src="images/pic01.jpg" alt="" class="show">
+		<img src="images/pic02.jpg" alt="">
+		<img src="images/pic03.jpg" alt="">
+	</div>
+ 
+	<script>
+		
+		function task() {
+			var img = document.querySelector(".show");
+			img.className = "";
+			//console.log(img.nextSibling);
+			//console.log(img.nextElementSibling);
+			  if(img.nextElementSibling!=null){
+				img.nextElementSibling.className="show";
+			}else{
+				document.querySelector("#d1>:first-child").className="show";
+			}
+		}
+		var timer = setInterval("task()",1000);
+ 
+		d1.onmouseover = function() {
+			clearInterval(timer);
+			timer=null;
+		}
+ 
+		d1.onmouseout = function() {
+			timer = setInterval("task()",1000); //这里前面不能加var，不然就会新建一个定时器，造成图片轮播切换混乱
+		}
+	</script>
+</body>
+</html>

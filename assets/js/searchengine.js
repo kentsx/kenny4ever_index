@@ -1,0 +1,14 @@
+document.writeln("<script>");
+document.writeln("var _hmt = _hmt || [];");
+document.writeln("(function() {");
+document.writeln("  var hm = document.createElement(\'script\');");
+document.writeln("  hm.src = \'https://hm.baidu.com/hm.js?62fa6e4da16eb4bf3b2b7aba0c81304d\';");
+document.writeln("  var s = document.getElementsByTagName(\'script\')[0]; ");
+document.writeln("  s.parentNode.insertBefore(hm, s);");
+document.writeln("})();");
+document.writeln("</script>");
+document.writeln("");
+document.writeln("<!--google_site_verification: -->");
+document.writeln("<meta name=\'google-site-verification\' content=\'zbNnqeyUA_AMWTStxMvUjC9Bdpl6JMYL15oPSDuuq-E\' />");
+document.writeln("<!--#baidu-site-verification: -->");
+document.writeln("<meta name=\'baidu-site-verification\' content=\'LDr783Jm1z\' />");

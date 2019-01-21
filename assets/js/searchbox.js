@@ -1,0 +1,11 @@
+document.writeln("<form target=\'_blank\' method=\'post\' action=\'http://zhannei.baidu.com/cse/site=\'>");
+document.writeln("											<div class=\'row uniform\'>");
+document.writeln("												<div class=\'8u 12u$(small)\'>");
+document.writeln("													<input type=\'text\' name=\'q\' id=\'query\' value=\'\' placeholder=\'Query\' />");
+document.writeln("													<input type=\'hidden\' name=\'cc\' value=\'http://kentrprime.github.io\'>");
+document.writeln("												</div>");
+document.writeln("												<div class=\'4u$ 12u$(small)\'>");
+document.writeln("													<input type=\'submit\' value=\'Search\' class=\'fit\' />												");
+document.writeln("												</div>");
+document.writeln("											</div>");
+document.writeln("										</form>");

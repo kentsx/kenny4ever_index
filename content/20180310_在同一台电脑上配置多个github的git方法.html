@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<!--
+	Urban by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>在同一台电脑上配置多个github的git方法 - Kent Prime</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+
+
+	<!--markdown-->
+	<link rel="stylesheet" href="../editor.md/css/editormd.preview.min.css" />
+	<script src="../editor.md/lib/marked.min.js"></script>
+	<script src="../editor.md/lib/prettify.min.js"></script>
+	<script src="../editor.md/lib/raphael.min.js"></script>
+	<script src="../editor.md/lib/underscore.min.js"></script>
+	<script src="../editor.md/lib/sequence-diagram.min.js"></script>
+	<script src="../editor.md/lib/flowchart.min.js"></script>
+	<script src="../editor.md/lib/jquery.flowchart.min.js"></script>
+	<script src="../editor.md/editormd.min.js"></script>
+	<!--markdown-->
+
+	</head>
+	<body class="subpage">
+
+		<!--header & nav-->
+		 <script type="text/javascript" src="../assets/js/header_nav.js"></script>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Section -->
+					<section class="wrapper">
+						<div class="inner">
+							<div class="flex flex-2">
+								<div class="col col2">
+								
+										<h3>在同一台电脑上配置多个github的git方法</h3>									
+										<h5>Edited at GMT+8 
+											<script>
+											document.write(document.lastModified);
+											</script>
+											</h5>
+								<div class="markdown-here-wrapper">
+	<p>
+		[TOC]
+	</p>
+	<p>
+		由于近期测试在github page上托管个人主页，前一个是用html做的，但没有套用AXEO及其他，纯HTML，尽管界面套用模板挺漂亮，但发布文章实在是非常麻烦，所以便又重新注册此github账号用以单独作为page使用。
+	</p>
+	<p>
+		所以这里就碰到了一个问题，需要在同一台电脑上配置两个github的ssh，方便git。
+	</p>
+	<p>
+		在强大互联网上搜索之后，总结出自己的这套。借鉴前人的经验，略有不完善处，我会继续改进。文后会给出参考文章网址。
+	</p>
+	<hr />
+	<h2 id="-" style="font-weight:bold;font-size:1.4em;">
+		假设环境
+	</h2>
+	<blockquote style="color:#777777;">
+		<p>
+			账号一：github第一个账号：github；<br />
+账号二：github第二个账号：gitsecond。
+		</p>
+	</blockquote>
+	<h2 id="-" style="font-weight:bold;font-size:1.4em;">
+		配置账号一
+	</h2>
+	<h4 id="-ssh-" style="font-weight:bold;font-size:1.2em;">
+		生成ssh密钥
+	</h4>
+<pre>1、安装Git软件
+2、在桌面打开Git，进行设置
+git config --global user.name "userName"//github的帐号名(也可以自定义)
+git config --global user.email "emailAdress"//github的邮箱地址(也可以自定义)
+3、生成ssh密钥
+ssh-keygen -t rsa -C "githubEmailAdress"//github邮箱地址</pre>
+	<h4 id="github-" style="font-weight:bold;font-size:1.2em;">
+		github网站配置
+	</h4>
+	<p>
+		在github上将id_rsa.pub文件内容添加上（简略方法如下，还不清楚请百度）
+	</p>
+	<p>
+		具体方法为:
+	</p>
+	<blockquote style="color:#777777;">
+		<p>
+			在github页面右上角，点击头像，然后Settings；<br />
+左边栏点击SSH and GPG keys,右侧出现New SSH key按键，将内容复制进去即可。
+		</p>
+	</blockquote>
+	<h2 id="-" style="font-weight:bold;font-size:1.4em;">
+		配置账号二
+	</h2>
+	<h4 id="-ssh-" style="font-weight:bold;font-size:1.2em;">
+		生产ssh密钥
+	</h4>
+<pre>ssh-keygen -t rsa -C "githubEmailAdress"//github邮箱地址
+# 设置名称为id_rsa_gitsecond
+Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa): id_rsa_gitsecond</pre>
+	<p>
+		注意此时.ssh文件夹中会产生两个名字为id_rsa_gitsecond的文件。
+	</p>
+	<h4 id="-ssh-agent-" style="font-weight:bold;font-size:1.2em;">
+		新密钥添加到SSH agent中
+	</h4>
+<pre>ssh-agent bash
+ssh-add ~/.ssh/id_rsa_gitsecond</pre>
+	<h4 id="-config-" style="font-weight:bold;font-size:1.2em;">
+		用记事本创建一个config文件（后缀请在编辑完内容后删除）
+	</h4>
+<pre># 该文件用于配置私钥对应的服务器
+# Default github user
+Host github
+HostName github.com
+User git
+IdentityFile C:/Users/Administrator/.ssh/id_rsa
+
+# gitsecond配置
+Host gitsecond
+HostName github.com
+User git
+IdentityFile C:/Users/Administrator/.ssh/id_rsa_gitsecond</pre>
+	<h2 id="-" style="font-weight:bold;font-size:1.4em;">
+		测试链接情况
+	</h2>
+<pre>$ ssh -T github
+Hi xxxxxxx! You've successfully authenticated, but GitHub does not provide shel
+l access.
+
+$ ssh -T gitsecond #使用config中的host值
+Hi yyyyyyy! You've successfully authenticated, but GitHub does not provide shell
+ access.</pre>
+	<h2 id="clone-" style="font-weight:bold;font-size:1.4em;">
+		clone文件至本地
+	</h2>
+	<blockquote style="color:#777777;">
+		<p>
+			若使用gitsecond账号：
+		</p>
+<pre>git clone gitsecond:github_name/your_repository_name.git #第一个为你的github名字，第二个为repo的名字</pre>
+	</blockquote>
+	<h2 id="-" style="font-weight:bold;font-size:1.4em;">
+		日常使用
+	</h2>
+	<p>
+		<strong>注意：日常使用中，若是使用第一个账号，因为是default的，push前无需额外操作。但使用gitsecond账号，push前要将ssh再加载到agent上一次。命令如下：</strong>
+	</p>
+<pre>ssh-agent bash
+ssh-add ~/.ssh/id_rsa_gitsecond</pre>
+	<hr />
+	<p>
+		参考链接：<br />
+<a href="https://jingyan.baidu.com/article/219f4bf7f6f8e1de442d3829.html">百度经验贴</a><br />
+<a href="http://blog.csdn.net/u012150370/article/details/52694629">CSDN帖子</a>
+	</p>
+	<div style="font-size:0em;padding:0;margin:0;">
+	</div>
+</div>
+
+								
+								</div>
+								<div class="col col1 first">
+									<script type="text/javascript" src="../assets/js/searchbox.js"></script>
+								</div>
+
+						</div>
+							
+					</section>
+					
+					
+
+		
+
+		<!-- Footer -->
+			
+			<script type="text/javascript" src="../assets/js/footer.js"></script>
+			
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
