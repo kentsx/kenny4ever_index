@@ -1,6 +1,6 @@
 document.writeln("<!-- Header -->");
 document.writeln("			<header id=\'header\'>");
-document.writeln("				<div class=\'logo\'><a href=\'index.html\'>KENT<span>4EVER</span></a></div>");
+document.writeln("				<div class=\'logo\'><a href=\'index.html\'>Kenny<span>4EVER</span></a></div>");
 document.writeln("				<a href=\'#menu\'>Menu</a>");
 document.writeln("			</header>");
 document.writeln("");
